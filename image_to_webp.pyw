@@ -48,7 +48,7 @@ def handle_drop(event):
 
 # GUI setup
 root = TkinterDnD.Tk()
-root.title("Drag-and-Drop WebP Converter")
+root.title("Easy WebP Converter")
 root.geometry("400x300")
 root.resizable(False, False)
 
