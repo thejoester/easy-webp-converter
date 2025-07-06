@@ -42,18 +42,24 @@ Want to build it yourself or contribute? Here's how:
 ```bash
 git clone https://github.com/thejoester/easy-webp-converter.git
 cd easy-webp-converter
-
+```
 ### Install Dependencies
 
-`pip install pillow tkinterdnd2 pyinstaller`
+```bash
+pip install pillow tkinterdnd2 pyinstaller
+```
 
 ### Build the Executable
 
-`pyinstaller --noconsole --onefile --icon=ewc.ico --name EasyWebPConverter --version-file=version.txt image_to_webp.pyw`
+```bash
+pyinstaller --noconsole --onefile --icon=ewc.ico --name EasyWebPConverter --version-file=version.txt image_to_webp.pyw
+```
 
 ### Optional: Clean Build
 
-`pyinstaller --clean ...`
+```bash
+pyinstaller --clean ...
+```
 
 ### License
 
