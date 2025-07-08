@@ -30,7 +30,7 @@ jobs:
 
       - name: Build executable
         run: |
-          pyinstaller --noconfirm --onefile --windowed easywebp.pyw
+          pyinstaller --noconfirm --onefile --windowed image_to_webp.pyw
 
       - name: Rename output
         run: |
