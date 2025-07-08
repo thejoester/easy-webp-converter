@@ -6,6 +6,9 @@
 Convert your image files to `.webp` with a simple drag-and-drop interface.  
 No terminal. No install. No bloat. Just WebP magic.
 
+![image](https://github.com/user-attachments/assets/7113140c-5dc3-4691-a67d-c56fe9d9dd7f)
+
+
 ---
 
 ##  Features
@@ -16,6 +19,9 @@ No terminal. No install. No bloat. Just WebP magic.
 - Prevents overwrites by auto-renaming (`image-1.webp`, `image-2.webp`)
 - Windows-native `.exe` — no Python needed
 - Open-source and offline-friendly
+
+## Add to Start menu
+- Right-click .exe and select "Pin to Start"
 
 ---
 
