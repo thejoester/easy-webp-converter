@@ -34,7 +34,7 @@ jobs:
 
       - name: Rename output
         run: |
-          rename dist\\easywebp.exe EasyWebPConverter-${{ env.VERSION }}.exe
+          rename dist\\image_to_webp.exe EasyWebPConverter-${{ env.VERSION }}.exe
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
