@@ -1,46 +1,43 @@
-name: Build and Release EasyWebPConverter
+name: Build EXE
 
 on:
   push:
     tags:
-      - "v*"
+      - '*'
 
 jobs:
   build:
     runs-on: windows-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: '3.12'
 
       - name: Install dependencies
         run: |
+          python -m pip install --upgrade pip
           pip install pillow tkinterdnd2 pyinstaller
 
       - name: Extract version from tag
-        id: version
+        id: vars
         run: |
-          $tag = "${{ github.ref }}".Split("/")[-1] -replace "^v", ""
-          $tuple = $tag.Split(".") + @(0,0,0,0) | Select-Object -First 4
-          $tuple = $tuple -join ", "
-          $template = Get-Content version_template.txt -Raw
-          $template = $template -replace "{{VER_STRING}}", "$tag"
-          $template = $template -replace "{{VER_TUPLE}}", $tuple
-          Set-Content version.txt $template -Encoding UTF8
-        shell: pwsh
+          echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
 
-      - name: Build EXE
+      - name: Build executable
         run: |
-          pyinstaller --noconsole --onefile --icon=ewc.ico --name EasyWebPConverter --version-file=version.txt image_to_webp.pyw
+          pyinstaller --noconfirm --onefile --windowed easywebp.pyw
 
-      - name: Upload release artifact
-        uses: softprops/action-gh-release@v1
+      - name: Rename output
+        run: |
+          rename dist\\easywebp.exe EasyWebPConverter-${{ env.VERSION }}.exe
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
         with:
-          files: dist/EasyWebPConverter.exe
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          name: EasyWebPConverter-${{ env.VERSION }}
+          path: dist/EasyWebPConverter-${{ env.VERSION }}.exe
