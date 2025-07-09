@@ -40,3 +40,10 @@ jobs:
         with:
           name: EasyWebPConverter-${{ env.VERSION }}
           path: dist/EasyWebPConverter-${{ env.VERSION }}.exe
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/EasyWebPConverter-${{ env.VERSION }}.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
