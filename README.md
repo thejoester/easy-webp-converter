@@ -13,12 +13,13 @@ No terminal. No install. No bloat. Just WebP magic.
 
 ##  Features
 
-- Drag and drop one or more images
+- Drag and drop one or more images  — or entire folders!
+- Recursively converts supported images in subfolders
 - Supports `.jpg`, `.jpeg`, `.png`, `.bmp`, `.tiff`, `.gif`, etc.
 - Converts to `.webp` using Python and Pillow
 - Prevents overwrites by auto-renaming (`image-1.webp`, `image-2.webp`)
 - Windows-native `.exe` — no Python needed
-- Open-source and offline-friendly
+- Open-source and offline-friendly, no telemetry, no nonsense
 
 ## Add to Start menu
 - Right-click .exe and select "Pin to Start"
