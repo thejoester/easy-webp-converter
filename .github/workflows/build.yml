@@ -24,16 +24,16 @@ jobs:
           pip install pillow tkinterdnd2 pyinstaller
 
       - name: Extract version from tag
-          id: vars
-          shell: bash
-          run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+        id: vars
+        shell: bash
+        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
 
       - name: Build executable
         run: |
           pyinstaller --noconfirm --onefile --windowed image_to_webp.pyw
 
       - name: Rename output
-          run: move dist\\image_to_webp.exe dist\\EasyWebPConverter-${{ env.VERSION }}.exe
+        run: move dist\\image_to_webp.exe dist\\EasyWebPConverter-${{ env.VERSION }}.exe
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
