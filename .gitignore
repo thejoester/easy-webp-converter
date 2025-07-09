@@ -1,5 +1,22 @@
-/dist/
-/build/
-/__pycache__/
-/*.spec
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+
+# Build artifacts
+build/
+dist/
+*.spec
 *.exe
+*.log
+
+# PyInstaller junk
+*.manifest
+*.dll
+
+# VS Code or PyCharm
+.vscode/
+.idea/
+
+# OS garbage
+.DS_Store
+Thumbs.db
