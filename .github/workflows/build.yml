@@ -30,7 +30,7 @@ jobs:
 
       - name: Build executable
         run: |
-          pyinstaller --noconfirm --onefile --windowed image_to_webp.pyw
+          pyinstaller --noconfirm --onefile --windowed --icon=ewc.ico image_to_webp.pyw
 
       - name: Rename output
         run: move dist\\image_to_webp.exe dist\\EasyWebPConverter-${{ env.VERSION }}.exe
