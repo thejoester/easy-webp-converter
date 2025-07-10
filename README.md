@@ -6,8 +6,10 @@
 Convert your image files to `.webp` with a simple drag-and-drop interface.  
 No terminal. No install. No bloat. Just WebP magic.
 
-![image](https://github.com/user-attachments/assets/7113140c-5dc3-4691-a67d-c56fe9d9dd7f)
+![image](https://github.com/user-attachments/assets/e37e1087-5565-42a5-871e-d34efacf2834) 
 
+### Drag folders and convert all supported files recursively! 
+![EasyWebPConverter_KGcBddYoMi](https://github.com/user-attachments/assets/ce4c9dd2-e2ad-42f2-83fc-4b43a467492d)
 
 ---
 
