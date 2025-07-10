@@ -31,7 +31,7 @@ drag_label = ttk.Label(
 	anchor="center",
 	relief="solid",
 	padding=10,
-	font=("Segoe UI Emoji", 14) 
+	font=("Segoe UI Emoji", 14)
 )
 drag_label.pack(padx=10, pady=10, fill="both", expand=True, ipady=30)
 
@@ -98,6 +98,7 @@ def convert_images(file_paths):
 	success_count = 0
 	total_files = len([f for f in file_paths if os.path.splitext(f)[1].lower() in SUPPORTED_FORMATS])
 	processed = 0
+	errors = []
 
 	for file_path in file_paths:
 		base, ext = os.path.splitext(file_path)
@@ -106,38 +107,37 @@ def convert_images(file_paths):
 
 		filename = os.path.basename(file_path)
 		file_size = os.path.getsize(file_path)
-		if file_size < 1_000_000:
-			file_size_str = f"{round(file_size / 1024)} KB"
-		else:
-			file_size_str = f"{round(file_size / (1024 * 1024), 1)} MB"
-
+		file_size_str = f"{round(file_size / 1024)} KB" if file_size < 1_000_000 else f"{round(file_size / (1024 * 1024), 1)} MB"
 		root.after(0, lambda f=filename, s=file_size_str: write_output(f"{f} ({s})...", False))
 
 		try:
+			if not os.access(os.path.dirname(file_path), os.W_OK):
+				raise PermissionError("No write permission to folder")
 			img = Image.open(file_path).convert("RGB")
-
-			# Ensure unique output filename
 			out_path = base + ".webp"
 			counter = 1
 			while os.path.exists(out_path):
 				out_path = f"{base}-{counter}.webp"
 				counter += 1
-
 			img.save(out_path, "webp")
 			success_count += 1
 			processed += 1
-
 			root.after(0, lambda f=filename, o=os.path.basename(out_path): write_output(f"{f} → {o} ✅", True))
 			update_progress(processed, total_files)
-
 		except Exception as e:
-			root.after(0, lambda f=filename, err=e: messagebox.showerror("Conversion Error", f"Error converting {f}:\n\n{err}"))
+			errors.append(f"{filename} — {str(e)}")
 
 	if success_count == 0:
 		root.after(0, lambda: write_output("⚠️ No supported files were converted."))
 	else:
 		root.after(0, lambda: write_output("✅ Finished!"))
 		root.after(500, lambda: progress_bar.config(value=0))
+
+	if errors:
+		summary = "\n".join(errors[:10])
+		if len(errors) > 10:
+			summary += f"\n...and {len(errors) - 10} more."
+		messagebox.showerror("Conversion Errors", f"{len(errors)} file(s) failed.\n\n{summary}")
 
 # --- Threaded handler ---
 def convert_in_background(files):
