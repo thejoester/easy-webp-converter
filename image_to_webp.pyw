@@ -113,17 +113,28 @@ def convert_images(file_paths):
 		try:
 			if not os.access(os.path.dirname(file_path), os.W_OK):
 				raise PermissionError("No write permission to folder")
-			img = Image.open(file_path).convert("RGB")
+
+			img = Image.open(file_path)
+			has_alpha = img.mode in ("RGBA", "LA") or "transparency" in img.info
+
 			out_path = base + ".webp"
 			counter = 1
 			while os.path.exists(out_path):
 				out_path = f"{base}-{counter}.webp"
 				counter += 1
-			img.save(out_path, "webp")
+
+			if has_alpha:
+				img = img.convert("RGBA")
+				img.save(out_path, "webp", lossless=True, method=6)
+			else:
+				img = img.convert("RGB")
+				img.save(out_path, "webp", quality=80, method=6)
+
 			success_count += 1
 			processed += 1
 			root.after(0, lambda f=filename, o=os.path.basename(out_path): write_output(f"{f} → {o} ✅", True))
 			update_progress(processed, total_files)
+
 		except Exception as e:
 			errors.append(f"{filename} — {str(e)}")
 
