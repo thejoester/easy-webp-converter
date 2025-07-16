@@ -11,6 +11,10 @@ No terminal. No install. No bloat. Just WebP magic.
 ### Drag folders and convert all supported files recursively! 
 ![EasyWebPConverter_KGcBddYoMi](https://github.com/user-attachments/assets/ce4c9dd2-e2ad-42f2-83fc-4b43a467492d)
 
+### Size comparison of my Steam Screenshots folder as an example
+<img width="722" height="509" alt="image" src="https://github.com/user-attachments/assets/02e3d48f-ed8e-42ec-97cf-b4a21f8138f6" />
+
+
 ---
 
 ##  Features
