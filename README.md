@@ -18,6 +18,7 @@ No terminal. No install. No bloat. Just WebP magic.
 - Drag and drop one or more images  — or entire folders!
 - Recursively converts supported images in subfolders
 - Supports `.jpg`, `.jpeg`, `.png`, `.bmp`, `.tiff`, `.gif`, etc.
+- Converts iPhone `.heic` / `.heif` photos too (via `pillow-heif`)
 - Converts to `.webp` using Python and Pillow
 - Prevents overwrites by auto-renaming (`image-1.webp`, `image-2.webp`)
 - Windows-native `.exe` — no Python needed
@@ -55,19 +56,21 @@ cd easy-webp-converter
 ### Install Dependencies
 
 ```bash
-pip install pillow tkinterdnd2 pyinstaller
+pip install pillow pillow-heif tkinterdnd2 pyinstaller
 ```
 
 ### Build the Executable
 
+Build from the `.spec` file, which bundles `pillow-heif` and its libheif DLLs so HEIC support works in the `.exe`:
+
 ```bash
-pyinstaller --noconsole --onefile --icon=ewc.ico --name EasyWebPConverter --version-file=version.txt image_to_webp.pyw
+pyinstaller EasyWebPConverter-1.3.2.spec
 ```
 
 ### Optional: Clean Build
 
 ```bash
-pyinstaller --clean ...
+pyinstaller --clean EasyWebPConverter-1.3.2.spec
 ```
 
 ### License

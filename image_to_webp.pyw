@@ -5,8 +5,15 @@ import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
 from PIL import Image
 
+# Register HEIF/HEIC support into Pillow if pillow-heif is installed
+try:
+	from pillow_heif import register_heif_opener
+	register_heif_opener()
+except ImportError:
+	pass
+
 # --- App Config ---
-SUPPORTED_FORMATS = (".jpg", ".jpeg", ".png", ".bmp")
+SUPPORTED_FORMATS = (".jpg", ".jpeg", ".png", ".bmp", ".heic", ".heif")
 
 # --- Attempt tkinterdnd2 ---
 try:
@@ -26,7 +33,7 @@ root.resizable(True, True)
 # Drag area
 drag_label = ttk.Label(
 	root,
-	text="🖼️ Drag and drop image files here (.jpg/.png/.bmp)" if dnd_available else
+	text="🖼️ Drag and drop image files here (.jpg/.png/.bmp/.heic)" if dnd_available else
 	"Drag-and-drop not available.\nInstall tkinterdnd2 for full functionality.",
 	anchor="center",
 	relief="solid",
@@ -157,7 +164,7 @@ def convert_in_background(files):
 	finally:
 		root.after(0, lambda: drag_label.config(
 			state="normal",
-			text="🖼️ Drag and drop image files here (.jpg/.png/.bmp)"
+			text="🖼️ Drag and drop image files here (.jpg/.png/.bmp/.heic)"
 		))
 
 # --- Drag-and-drop handler ---
