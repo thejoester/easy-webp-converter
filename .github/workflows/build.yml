@@ -21,7 +21,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pillow tkinterdnd2 pyinstaller
+          pip install pillow pillow-heif tkinterdnd2 pyinstaller
 
       - name: Extract version from tag
         id: vars
@@ -30,7 +30,7 @@ jobs:
 
       - name: Build executable
         run: |
-          pyinstaller --noconfirm --onefile --windowed --icon=ewc.ico image_to_webp.pyw
+          pyinstaller --noconfirm --onefile --windowed --icon=ewc.ico --collect-all pillow_heif image_to_webp.pyw
 
       - name: Rename output
         run: move dist\\image_to_webp.exe dist\\EasyWebPConverter-${{ env.VERSION }}.exe

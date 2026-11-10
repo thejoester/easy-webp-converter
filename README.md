@@ -11,10 +11,6 @@ No terminal. No install. No bloat. Just WebP magic.
 ### Drag folders and convert all supported files recursively! 
 ![EasyWebPConverter_KGcBddYoMi](https://github.com/user-attachments/assets/ce4c9dd2-e2ad-42f2-83fc-4b43a467492d)
 
-### Size comparison of my Steam Screenshots folder as an example
-<img width="722" height="509" alt="image" src="https://github.com/user-attachments/assets/02e3d48f-ed8e-42ec-97cf-b4a21f8138f6" />
-
-
 ---
 
 ##  Features
@@ -65,16 +61,16 @@ pip install pillow pillow-heif tkinterdnd2 pyinstaller
 
 ### Build the Executable
 
-Build from the `.spec` file, which bundles `pillow-heif` and its libheif DLLs so HEIC support works in the `.exe`:
+`--collect-all pillow_heif` bundles `pillow-heif` and its libheif DLLs so HEIC support works in the `.exe`:
 
 ```bash
-pyinstaller EasyWebPConverter-1.3.2.spec
+pyinstaller --noconfirm --onefile --windowed --icon=ewc.ico --collect-all pillow_heif image_to_webp.pyw
 ```
 
 ### Optional: Clean Build
 
 ```bash
-pyinstaller --clean EasyWebPConverter-1.3.2.spec
+pyinstaller --clean --noconfirm --onefile --windowed --icon=ewc.ico --collect-all pillow_heif image_to_webp.pyw
 ```
 
 ### License
